@@ -14,6 +14,7 @@ namespace manac.Assets.Scripts
         private float currentSpeed;
         private float timer = 0f;
         public float selfDestroy = 3f;
+        public int damage = 1;
         //private string bullet_color;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -34,7 +35,6 @@ namespace manac.Assets.Scripts
             {
                 currentSpeed = endSpeed; // clamp to final speed
             }
-
             velocity = direction * currentSpeed;
         }
 
@@ -45,6 +45,15 @@ namespace manac.Assets.Scripts
             pos += velocity * Time.fixedDeltaTime;
 
             transform.position = pos;
+        }
+
+        void OnCollisionEnter2D(Collision2D col)
+        {
+            if (col.collider.CompareTag("Player"))
+            {
+                var hp = col.collider.GetComponent<ShipPlayerHealth>();
+                if (hp) hp.TakeDamage(damage);
+            }
         }
     }
 }

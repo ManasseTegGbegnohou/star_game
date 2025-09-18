@@ -105,11 +105,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::manac.Assets.Scripts.Bullet
   velocity: {x: 0, y: 0}
-  direction: {x: -0.9448303, y: 0.32756016}
+  direction: {x: 0.9261149, y: -0.37724146}
   startSpeed: 10
   endSpeed: 7
   decelTime: 0.3
   selfDestroy: 3
+  damage: 1
 --- !u!61 &-5421090036829451975
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -140,7 +141,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

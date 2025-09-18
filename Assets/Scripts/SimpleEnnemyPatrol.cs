@@ -7,14 +7,10 @@ namespace manac.Assets.Scripts
     [RequireComponent(typeof(SpriteRenderer))]
     public class SimpleEnnemyPatrol : MonoBehaviour
     {
-        public Transform leftPoint, rightPoint;
-        public float speed = 2f;
         public int touchDamage = 1;
-        private Animator animator;
 
         void Start()
         {
-            animator = GetComponent<Animator>();
         }
 
         void Update()
