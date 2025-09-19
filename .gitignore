@@ -103,3 +103,29 @@ InitTestScene*.unity*
 .vscode
 .idea
 .vsconfig
+
+# Unity generated folders (should not be versioned),
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+Logs/
+UserSettings/
+
+# Visual Studio / Rider generated files,
+.vs/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+
+# OS junk,
+.DS_Store
+Thumbs.db
