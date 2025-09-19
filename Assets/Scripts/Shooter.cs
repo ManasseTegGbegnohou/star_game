@@ -24,7 +24,7 @@ namespace manac.Assets.Scripts
         [SerializeField] private int bulletsPerAttack = 2;
         [SerializeField] private int attackCount = 2; // number of volleys per attack
 
-        void Start()
+        protected virtual void Start()
         {
             rb = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
@@ -32,7 +32,7 @@ namespace manac.Assets.Scripts
             cooldown = fireRate;
         }
 
-        void Update()
+        protected virtual void Update()
         {
             if (cooldown > 0)
                 cooldown -= Time.deltaTime;
@@ -66,9 +66,10 @@ namespace manac.Assets.Scripts
             {
                 foreach (Canon canon in canons)
                 {
-                    canon.bullet.startSpeed = 10f;
-                    canon.bullet.endSpeed = 7f;
+                    canon.bullet.startSpeed = 8f;
+                    canon.bullet.endSpeed = 5f;
                     canon.bullet.decelTime = 0.3f;
+                    canon.bullet.damage = 1; // Set damage for enemy bullets
                     for (int i = 0; i < bulletsPerAttack; i++)
                     {
 

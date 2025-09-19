@@ -5,6 +5,7 @@ namespace manac.Assets.Scripts
     public class Canon : MonoBehaviour
     {
         public Bullet bullet;
+        
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
@@ -19,6 +20,12 @@ namespace manac.Assets.Scripts
 
         public void Shoot()
         {
+            if (bullet == null)
+            {
+                Debug.LogError($"{gameObject.name}: No bullet prefab assigned to canon!");
+                return;
+            }
+            
             GameObject b = Instantiate(bullet.gameObject, transform.position, Quaternion.identity);
         }
     }
