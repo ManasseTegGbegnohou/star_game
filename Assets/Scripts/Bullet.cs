@@ -17,7 +17,7 @@ namespace manac.Assets.Scripts
         public float startSpeed = 9f;
         public float endSpeed = 6.5f;
         public float decelTime = 0.5f;
-        public float selfDestroy = 3f;
+        public float selfDestroy = 5.5f;
         public int damage = 1;
         public BulletSource bulletSource = BulletSource.Player;
         

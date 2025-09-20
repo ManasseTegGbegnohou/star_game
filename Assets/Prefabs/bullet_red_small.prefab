@@ -105,11 +105,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::manac.Assets.Scripts.Bullet
   velocity: {x: 0, y: 0}
-  direction: {x: -0.9682707, y: -0.24990359}
+  direction: {x: -0.98530155, y: 0.17082395}
   startSpeed: 9
   endSpeed: 6.5
   decelTime: 0.5
-  selfDestroy: 1.5
+  selfDestroy: 2
   damage: 1
   bulletSource: 0
 --- !u!61 &-2530394986575018327

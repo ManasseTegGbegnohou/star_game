@@ -1596,7 +1596,7 @@ MonoBehaviour:
   attackCount: 1
   bulletStarSpeed: 6
   bulletEndSpeed: 2
-  orbitRadius: 1
+  orbitRadius: 1.5
   rotationSpeed: 200
 --- !u!1 &1264628981
 GameObject:
@@ -1827,7 +1827,7 @@ MonoBehaviour:
   attackCount: 1
   bulletStarSpeed: 6
   bulletEndSpeed: 2
-  orbitRadius: 1
+  orbitRadius: 1.5
   rotationSpeed: 200
 --- !u!1 &1268200199
 GameObject:

@@ -205,7 +205,7 @@ namespace manac.Assets.Scripts
                     canon.bullet.endSpeed = bulletEndSpeed;
                     canon.bullet.decelTime = 0.3f;
                     canon.bullet.damage = 1; // Set damage for enemy bullets
-                    canon.bullet.selfDestroy = 3f; // Enemy bullets last longer
+                    canon.bullet.selfDestroy = 5.5f; // Enemy bullets last longer
                     
                     for (int i = 0; i < bulletsPerAttack; i++)
                     {
