@@ -38,7 +38,6 @@ namespace manac.Assets.Scripts
             }
             else
             {
-                Debug.LogError("BulletPool: No bullet prefab assigned!");
             }
         }
         
@@ -57,7 +56,6 @@ namespace manac.Assets.Scripts
         {
             if (bulletPrefab == null)
             {
-                Debug.LogError("BulletPool: Cannot get bullet - no prefab assigned!");
                 return null;
             }
             
@@ -81,7 +79,6 @@ namespace manac.Assets.Scripts
             }
             else
             {
-                Debug.LogWarning("BulletPool: No bullets available and cannot expand pool!");
                 return null;
             }
             

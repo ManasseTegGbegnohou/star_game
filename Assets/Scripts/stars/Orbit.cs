@@ -6,9 +6,9 @@ namespace manac.Assets.Scripts.stars
     {
         [Header("Orbit Settings")]
         public Transform pivotPoint; 
-        public float rotationSpeed = 15f; // Slow clockwise rotation
-        public float orbitRadius = 3f;
-        public bool autoFindClosestPivot = true;
+        public float rotationSpeed = 15f; 
+        public float orbitRadius = 4.5f;
+        public bool autoFindClosestPivot = false;
         public bool maintainRadius = true;
         
         [Header("Movement Settings")]
@@ -21,6 +21,7 @@ namespace manac.Assets.Scripts.stars
         
         void Start()
         {
+            
             // Auto-find closest pivot if enabled
             if (autoFindClosestPivot)
             {
@@ -31,6 +32,7 @@ namespace manac.Assets.Scripts.stars
             if (pivotPoint != null)
             {
                 centerPosition = pivotPoint.position;
+                
                 Vector3 directionToCenter = (centerPosition - transform.position).normalized;
                 currentAngle = Mathf.Atan2(directionToCenter.y, directionToCenter.x);
                 
@@ -40,6 +42,9 @@ namespace manac.Assets.Scripts.stars
                     float distanceToCenter = Vector3.Distance(transform.position, centerPosition);
                     orbitRadius = distanceToCenter;
                 }
+            }
+            else
+            {
             }
         }
 
@@ -75,6 +80,17 @@ namespace manac.Assets.Scripts.stars
                 possiblePivots[possiblePivots.Length - 1] = Spawn.Instance.transform;
             }
             
+            // Look for objects with "Pivot" in their name
+            GameObject[] allObjects = FindObjectsOfType<GameObject>();
+            foreach (GameObject obj in allObjects)
+            {
+                if (obj.name.ToLower().Contains("pivot") || obj.name.ToLower().Contains("center"))
+                {
+                    System.Array.Resize(ref possiblePivots, possiblePivots.Length + 1);
+                    possiblePivots[possiblePivots.Length - 1] = obj.transform;
+                }
+            }
+            
             // Find the closest pivot
             if (possiblePivots.Length > 0)
             {
@@ -92,7 +108,9 @@ namespace manac.Assets.Scripts.stars
                 }
                 
                 pivotPoint = closestPivot;
-                Debug.Log($"{gameObject.name} found closest pivot: {pivotPoint.name} at distance {closestDistance:F2}");
+            }
+            else
+            {
             }
         }
         

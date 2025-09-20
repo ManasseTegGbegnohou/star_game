@@ -16,9 +16,9 @@ namespace manac.Assets.Scripts
         {
             Instance = this;
         }
-        private readonly float speed = 5.5f;
+        private readonly float speed = 6f;
         public float speedMultiplier = 1f;
-        private readonly float fireRate = 0.2f;
+        private readonly float fireRate = 0.35f;
         public float fireRateMultiplier = 1f;
 
         private Rigidbody2D rb;
@@ -33,21 +33,20 @@ namespace manac.Assets.Scripts
             animator = GetComponent<Animator>();
             canons = GetComponentsInChildren<Canon>();
             
-            // Ensure Rigidbody2D is set up for movement
+            // Ensure Rigidbody2D is set up for movment
             if (rb != null)
             {
-                rb.gravityScale = 0f; // No gravity in 2D space game
-                rb.linearDamping = 0f; // No air resistance
-                rb.angularDamping = 0f; // No angular resistance
-                rb.freezeRotation = true; // Don't rotate from physics
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation; // Only freeze rotation
-                Debug.Log("Rigidbody2D configured for movement");
+                rb.gravityScale = 0f; // No gravity in 2D space gam
+                rb.linearDamping = 0f; // No air resistnce
+                rb.angularDamping = 0f; // No angular resistnce
+                rb.freezeRotation = true; // Dont rotate from physics
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation; // Only freze rotation
             }
         }
 
         void Update()
         {
-            // Use new Input System for movement
+            // Use new Input Sytem for movement
             Vector2 keyboardInput = Vector2.zero;
             
             if (Keyboard.current != null)
@@ -62,21 +61,21 @@ namespace manac.Assets.Scripts
                     keyboardInput.x -= 1;
             }
             
-            // Use keyboard input if no Input System input
+            // Use keyboard input if no Input Sytem input
             if (moveInput.magnitude < 0.1f && keyboardInput.magnitude > 0.1f)
             {
                 moveInput = keyboardInput;
             }
             
             
-            // Movement with WASD/Arrow keys
+            // Movement with WASD/Arrow kys
             if (moveInput.magnitude > 0.1f)
             {
-                // Use transform movement (more reliable)
+                // Use transform movement (more relible)
                 transform.Translate(moveInput * (speed * speedMultiplier) * Time.deltaTime);
             }
 
-            //Rotate
+            //Rotat
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             Vector2 lookDir = (mousePos - transform.position).normalized;
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
@@ -94,19 +93,27 @@ namespace manac.Assets.Scripts
 
         private IEnumerator ShootSequence()
         {
+            // Start shoot animaton
             animator.SetTrigger("shoot");
-            yield return _waitForSeconds0_2;
-
-            // Calculate direction towards cursor for shooting
+            
+            // Calculate direction towards cursor for shootng
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             Vector2 shootDirection = (mousePos - transform.position).normalized;
 
             foreach (Canon canon in canons)
             {
-                canon.bullet.direction = shootDirection; // Shoot towards cursor
+                // Set bullet properties before shootng
+                canon.bullet.direction = shootDirection; // Shoot towards cursr
                 canon.bullet.selfDestroy = 1.5f;
+                canon.bullet.damage = 1; // Player bullets do 1 dmg
                 canon.Shoot();
             }
+            
+            // Wait for shoot animaton to play
+            yield return _waitForSeconds0_2;
+            
+            // Reset trigger to alow next shot
+            animator.ResetTrigger("shoot");
         }
 
         public void Move(InputAction.CallbackContext context)

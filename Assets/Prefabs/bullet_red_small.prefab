@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7061967423665754902}
   - component: {fileID: 8547417641883301700}
   - component: {fileID: -2530394986575018327}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bullet_red_small
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,12 +105,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::manac.Assets.Scripts.Bullet
   velocity: {x: 0, y: 0}
-  direction: {x: -0.38465667, y: 0.9230597}
+  direction: {x: -0.9682707, y: -0.24990359}
   startSpeed: 9
-  endSpeed: 6
+  endSpeed: 6.5
   decelTime: 0.5
   selfDestroy: 1.5
-  touchDamage: 1
+  damage: 1
+  bulletSource: 0
 --- !u!61 &-2530394986575018327
 BoxCollider2D:
   m_ObjectHideFlags: 0

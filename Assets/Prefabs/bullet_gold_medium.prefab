@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2680915238769408451}
   - component: {fileID: 5865686689852023252}
   - component: {fileID: 5718827677404390324}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bullet_gold_medium
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,10 +107,11 @@ MonoBehaviour:
   velocity: {x: 0, y: 0}
   direction: {x: 0, y: 1}
   startSpeed: 9
-  endSpeed: 6
+  endSpeed: 6.5
   decelTime: 0.5
   selfDestroy: 3
-  touchDamage: 1
+  damage: 1
+  bulletSource: 1
 --- !u!61 &5718827677404390324
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -5,19 +5,24 @@ namespace manac.Assets.Scripts
 {
     public class Bullet : MonoBehaviour
     {
-        //public int damage = 1;
+        public enum BulletSource
+        {
+            Player,
+            Enemy
+        }
+        
+        [Header("Bullet Properties")]
         public Vector2 velocity;
         public Vector2 direction = new(0, 1);
-        //public float rotation = 0f;
         public float startSpeed = 9f;
         public float endSpeed = 6.5f;
         public float decelTime = 0.5f;
-        private float currentSpeed;
-        private float timer = 0f;
         public float selfDestroy = 3f;
         public int damage = 1;
-        //private string bullet_color;
+        public BulletSource bulletSource = BulletSource.Player;
         
+        private float currentSpeed;
+        private float timer = 0f;
         private Coroutine destroyCoroutine;
         
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -58,26 +63,77 @@ namespace manac.Assets.Scripts
             transform.position = pos;
         }
 
-        void OnCollisionEnter2D(Collision2D col)
+        void OnTriggerEnter2D(Collider2D col)
         {
-            Debug.Log($"Bullet hit: {col.collider.name} with tag: {col.collider.tag}");
             
-            if (col.collider.CompareTag("Player"))
+            // Determine bullet source based on who fired it
+            bool isPlayerBullet = IsPlayerBullet();
+            
+            if (col.CompareTag("Player"))
             {
-                var hp = col.collider.GetComponent<ShipPlayerHealth>();
-                if (hp) 
+                // Only enemy bullets can damage the player
+                if (!isPlayerBullet)
                 {
-                    Debug.Log($"Player took {damage} damage!");
-                    hp.TakeDamage(damage);
+                    var hp = col.GetComponent<ShipPlayerHealth>();
+                    if (hp) 
+                    {
+                        // Check if player is already dead (though this shouldn't happen with current health system)
+                        if (hp.GetCurrentHealth() <= 0)
+                        {
+                            return;
+                        }
+                        
+                        hp.TakeDamage(damage);
+                        // Destroy bullet after hitting player
+                        ReturnToPool();
+                        return;
+                    }
+                    else
+                    {
+                    }
                 }
                 else
                 {
-                    Debug.Log("No ShipPlayerHealth component found!");
                 }
             }
+            else if (col.CompareTag("Enemy") || col.GetComponent<Shooter>() != null)
+            {
+                // Only player bullets can damage enemies
+                if (isPlayerBullet)
+                {
+                    var shooter = col.GetComponent<Shooter>();
+                    if (shooter) 
+                    {
+                        // Check if enemy is already dead
+                        if (shooter.IsDead())
+                        {
+                            return;
+                        }
+                        
+                        shooter.TakeDamage(damage);
+                        // Destroy bullet after hitting enemy
+                        ReturnToPool();
+                        return;
+                    }
+                    else
+                    {
+                    }
+                }
+                else
+                {
+                }
+            }
+            else
+            {
+            }
             
-            // Return bullet to pool instead of destroying
-            ReturnToPool();
+            // Bullets that don't hit valid targets continue flying
+            // They will be returned to pool after selfDestroy time or when they hit boundaries
+        }
+        
+        private bool IsPlayerBullet()
+        {
+            return bulletSource == BulletSource.Player;
         }
         
         private IEnumerator DestroyAfterTime()
@@ -112,6 +168,7 @@ namespace manac.Assets.Scripts
             currentSpeed = startSpeed;
             velocity = Vector2.zero;
             direction = new Vector2(0, 1);
+            bulletSource = BulletSource.Player; // Reset to default
             
             if (destroyCoroutine != null)
             {
