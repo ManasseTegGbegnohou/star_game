@@ -50,7 +50,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -5716321637643625595, guid: e97dbf9f13c89c540b6ff1eddf0a3936, type: 3}
+  m_Motion: {fileID: -7376582376698127271, guid: 104ed769171fc9e429cec12d3295eddb, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -87,7 +87,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Star
+  m_Name: Star_Ice
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: attack
@@ -191,7 +191,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -461010980345254755, guid: d14d38d62b2c07243b9842528b9ed164, type: 3}
+  m_Motion: {fileID: 9132420829510211874, guid: e506d45457f258c468595d974c1fbffb, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -244,7 +244,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 475419432688796921, guid: 130fe7d297fbd684099a7106e673f857, type: 3}
+  m_Motion: {fileID: 1691100049035612853, guid: c71d9c3d30823234f9908edc63181a90, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

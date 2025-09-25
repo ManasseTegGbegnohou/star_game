@@ -105,8 +105,12 @@ namespace manac.Assets.Scripts
                 // Set bullet properties before shootng
                 canon.bullet.direction = shootDirection; // Shoot towards cursr
                 canon.bullet.selfDestroy = 1.5f;
+                canon.bullet.startSpeed = 10f;
+                canon.bullet.endSpeed = 8f;
+                canon.bullet.decelTime = 0.5f;
                 canon.bullet.damage = 1; // Player bullets do 1 dmg
                 canon.Shoot();
+
             }
             
             // Wait for shoot animaton to play

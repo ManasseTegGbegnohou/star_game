@@ -23,7 +23,16 @@ namespace manac.Assets.Scripts
         [Header("Visual Feedback")]
         private SpriteRenderer spriteRenderer;
         private Color originalColor;
+
+        [Header("Change Level")]
+        [SerializeField] private int ennemiesLeft = 4;
+        public static ShipPlayerHealth Instance { get; private set; }
         
+        void Awake()
+        {
+            Instance = this;
+        }
+
         void Start()
         {
             animator = GetComponent<Animator>();
@@ -58,6 +67,13 @@ namespace manac.Assets.Scripts
                 // Start invulnerability peroid
                 StartInvulnerability();
             }
+        }
+
+        public void manageEnemies(int enemy)
+        {   
+            ennemiesLeft -= enemy;
+            if (ennemiesLeft == 0)
+                SceneManager.LoadScene("Scenes/lvl02");
         }
         
         private void StartInvulnerability()

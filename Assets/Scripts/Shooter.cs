@@ -158,9 +158,11 @@ namespace manac.Assets.Scripts
             
             // Wait for death animation to complete
             yield return _waitForSecondsDieAnim;
-            
+            var ship = ShipPlayerHealth.Instance;
+            ship.manageEnemies(1);
             // Destroy the game object
             Destroy(gameObject);
+
         }
         
         // Public getters
@@ -222,7 +224,6 @@ namespace manac.Assets.Scripts
                 }
                 yield return _waitForSecondsRows;
             }
-
         }
     }
 }
